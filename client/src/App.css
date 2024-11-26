@@ -7,3 +7,28 @@
   font-family: "Fira Mono", monospace;
 }
 
+.header {
+  background-image: url('./assets/header.jpg');
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.shop-button {
+  background-color: rgb(0, 0, 0.5);
+  color:white ;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.shop-button:hover {
+  background-color: lightgray;
+  color: black;
+}

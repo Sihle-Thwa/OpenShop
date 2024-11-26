@@ -1,5 +1,12 @@
+import TopHeader from "../components/TopHeader";
+
 function Home() {
-  return <div>Home</div>;
+  return (
+    <div className="container">
+      Home
+      <TopHeader />
+    </div>
+  );
 }
 
 export default Home;
