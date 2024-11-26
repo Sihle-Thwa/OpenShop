@@ -1,8 +1,12 @@
+import { BsBag, BsPerson, BsSearch } from "react-icons/bs";
+
 function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg justify-content-between d-flex">
       <div className="container justify-content-between d-flex">
-        <div className="nav-left">NavBar</div>
+        <div className="nav-left">
+          <div className="nav-brand">OpenShop</div>
+        </div>
         <div className="nav-centre">
           <ul className="navbar-nav">
             <li className="nav-item">
@@ -28,12 +32,15 @@ function NavBar() {
           </ul>
         </div>
         <div className="nav-right">
-          <button>
-            <i className="bi bi-bag"></i>
+          <button type="button" className="btn">
+            <BsBag />
           </button>
-
-          <i className="bi bi-search"></i>
-          <i className="bi bi-person"></i>
+          <button type="button" className="btn">
+            <BsPerson />
+          </button>
+          <button type="button" className="btn">
+            <BsSearch />
+          </button>
         </div>
       </div>
     </nav>
