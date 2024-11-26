@@ -1,0 +1,20 @@
+/* src/Home.css */
+
+.image-grid {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 16px; /* Space between images */
+    padding: 16px; /* Padding around the grid */
+  }
+  
+  .image-container {
+    overflow: hidden; /* Prevent overflow */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: shadow effect */
+  }
+  
+  .image-container img {
+    width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    display: flex; /* Remove bottom space */
+  }
