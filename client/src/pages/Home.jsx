@@ -2,6 +2,7 @@ import { useState } from "react";
 import TopHeader from "../components/TopHeader";
 import { femaleImages, maleImages } from "../assets/headerImages"; // Adjust the path as necessary
 import "./Home.css"; // Import a CSS file for styling
+import Banner from "../components/Banner";
 
 function Home() {
   const [selectedImages, setSelectedImages] = useState(femaleImages); // Default to female images
@@ -44,6 +45,7 @@ function Home() {
           </div>
         ))}
       </div>
+      <Banner/>
     </div>
   );
 }
