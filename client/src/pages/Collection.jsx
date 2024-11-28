@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ProductCard from "../components/ProductCard"; // Adjust the path as necessary
 import { products } from "../assets/products"; // Adjust the path as necessary
 
