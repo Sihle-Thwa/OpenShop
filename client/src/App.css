@@ -32,3 +32,15 @@
   background-color: lightgray;
   color: black;
 }
+
+.product-image {
+  width: 100%; /* Make the image responsive */
+  height: 200px; /* Set a fixed height */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+@media (max-width: 768px) {
+  .product-image {
+    height: 150px; /* Adjust height for smaller screens */
+  }
+}
