@@ -26,7 +26,7 @@ function Collection() {
       <div className="row">
         {/* Filter Section */}
         <div className="col-md-3 mb-4">
-          <div className="card">
+          <div className="card" style={{ border: "none" }}>
             <div className="card-body">
               <h5 className="card-title">Filter Options</h5>
               {/* Add your filtering options here */}
