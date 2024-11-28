@@ -3,6 +3,8 @@ import TopHeader from "../components/TopHeader";
 import { femaleImages, maleImages } from "../assets/headerImages"; // Adjust the path as necessary
 import "./Home.css"; // Import a CSS file for styling
 import Banner from "../components/Banner";
+import ProductCard from "../components/ProductCard";
+import { products } from "../assets/products"; // Adjust the path as necessary
 
 function Home() {
   const [selectedImages, setSelectedImages] = useState(femaleImages); // Default to female images
@@ -14,6 +16,8 @@ function Home() {
       setSelectedImages(maleImages);
     }
   };
+
+  const currentItems = products.slice(50, 54);
 
   return (
     <div className="container">
@@ -45,7 +49,18 @@ function Home() {
           </div>
         ))}
       </div>
-      <Banner/>
+      <Banner />
+
+      <div className="row p-4">
+        <h2 className="text-center">New Collection</h2>
+      </div>
+      <div className="row">
+        {currentItems.map((product) => (
+          <div className="col-md-3 mb-4" key={product.id}>
+            <ProductCard product={product} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
