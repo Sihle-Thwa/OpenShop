@@ -1,24 +1,42 @@
 import { useState } from "react";
 import ProductCard from "../components/ProductCard"; // Adjust the path as necessary
 import { products } from "../assets/products"; // Adjust the path as necessary
+import FilterComponent from "../components/FilterComponent"; // Import the FilterComponent
 
 function Collection() {
   const itemsPerPage = 9; // Number of items to display per page
   const [currentPage, setCurrentPage] = useState(1); // State for current page
+  const [filteredProducts, setFilteredProducts] = useState(products); // State for filtered products
 
   // Calculate the total number of pages
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   // Calculate the index of the first and last item on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   // Get the current items to display
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   // Function to handle page change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  // Function to handle filter changes
+  const handleFilterChange = (filters) => {
+    const { category, subCategory, size } = filters;
+
+    const filtered = products.filter(product => {
+      const matchesCategory = category ? product.category === category : true;
+      const matchesSubCategory = subCategory ? product.subCategory === subCategory : true;
+      const matchesSize = size ? product.sizes.includes(size) : true;
+
+      return matchesCategory && matchesSubCategory && matchesSize;
+    });
+
+    setFilteredProducts(filtered);
+    setCurrentPage(1); // Reset to first page when filters change
   };
 
   return (
@@ -26,24 +44,7 @@ function Collection() {
       <div className="row">
         {/* Filter Section */}
         <div className="col-md-3 mb-4">
-          <div className="card" style={{ border: "none" }}>
-            <div className="card-body">
-              <h5 className="card-title">Filter Options</h5>
-              {/* Add your filtering options here */}
-              <div>
-                <h6>Category</h6>
-                <div>
-                  <input type="checkbox" id="category1" />
-                  <label htmlFor="category1"> Category 1</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="category2" />
-                  <label htmlFor="category2"> Category 2</label>
-                </div>
-                {/* Add more filter options as needed */}
-              </div>
-            </div>
-          </div>
+          <FilterComponent products={products} onFilterChange={handleFilterChange} />
         </div>
 
         {/* Products Section */}
