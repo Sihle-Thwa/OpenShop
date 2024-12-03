@@ -1,7 +1,8 @@
 import { BsBag, BsPerson, BsSearch } from "react-icons/bs";
 import { useEffect, useState, useRef } from "react";
 
-function NavBar() {
+// eslint-disable-next-line react/prop-types
+function NavBar({ onOpenCart }) {
   const [sticky, setSticky] = useState(false);
   const navbar = useRef(null);
   const navbarOffset = useRef(null);
@@ -14,21 +15,18 @@ function NavBar() {
       }
     };
 
-    // Add scroll event listener
     window.addEventListener("scroll", handleScroll);
 
-    // Set initial navbar height after component mounts
     if (navbar.current) {
       navbar.current.style.height = `${
         navbar.current.getBoundingClientRect().height
       }px`;
     }
 
-    // Cleanup function to remove the event listener
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); // Dependency array ensures this effect runs only once
+  }, []);
 
   return (
     <nav
@@ -66,7 +64,7 @@ function NavBar() {
           </ul>
         </div>
         <div className="nav-right">
-          <button type="button" className="btn">
+          <button type="button" className="btn" onClick={onOpenCart}>
             <BsBag />
           </button>
           <button type="button" className="btn">
