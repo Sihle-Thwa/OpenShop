@@ -3,12 +3,30 @@ import { products } from "../assets/products.js"; // Adjust the path as necessar
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useState } from "react";
 
-function ProductPage() {
+// eslint-disable-next-line react/prop-types
+function ProductPage({ addToCart }) {
   const { productId } = useParams();
 
   const [isSelected, setIsSelected] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+
+  // Find the product by ID
+  const product = products.find((item) => item.id === productId); // Assuming productId is a string
+
+  // Handle case where product is not found
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    setToastMessage(`${product.name} has been added to your cart`);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
 
   const handleClick = () => {
     setIsSelected(!isSelected);
@@ -29,16 +47,7 @@ function ProductPage() {
     setShowToast(false);
   };
 
-  // Find the product by ID
-  const product = products.find((products) => products.id === productId); // Assuming productId is a string
-
-  // Handle case where product is not found
-  if (!product) {
-    return <div>Product not found</div>;
-  }
-
-  const uniqueSizes = [...new Set(products.flatMap(product => product.sizes))];
-
+  const uniqueSizes = [...new Set(products.flatMap(item => item.sizes))];
 
   return (
     <div className="container">
@@ -63,7 +72,9 @@ function ProductPage() {
           </div>
           <div className="row d d-flex justify-content-between align-items-center">
             <div className="col-10">
-              <button className="add-cart-btn w-100">Add to cart</button>
+              <button className="add-cart-btn w-100" onClick={handleAddToCart}>
+                Add to cart
+              </button>
             </div>
             <div className="col-2">
               <button
@@ -79,22 +90,19 @@ function ProductPage() {
                 ) : (
                   <BsHeart color="black" />
                 )}
-              </button>{" "}
+              </button>
             </div>
-          
           </div>
           <div className="row">
-          <div className="row p-4">
-          <ul className="d-flex justify-content-between">
-            {uniqueSizes.map((sz) => (
-              <button key={sz}>{sz}</button>
-            ))}
-          </ul>
-        </div>
+            <div className="row p-4">
+              <ul className="d-flex justify-content-between">
+                {uniqueSizes.map((sz) => (
+                  <button key={sz}>{sz}</button>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="row"></div>
-        
       </div>
 
       <div
@@ -112,7 +120,7 @@ function ProductPage() {
         }}
       >
         <div className="toast-header justify-content-between">
-          <strong className="mr-auto">Wishlist Notification</strong>
+          <strong className="mr-auto">Notification</strong>
           <button
             type="button"
             className="btn ml-2 mb-1 close"
@@ -121,7 +129,7 @@ function ProductPage() {
             <span>&times;</span>
           </button>
         </div>
-        <div className="toast-body">{toastMessage}</div>
+        <div className="toast-body">{toastMessage}</ div>
       </div>
     </div>
   );
