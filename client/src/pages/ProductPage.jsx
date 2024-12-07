@@ -4,7 +4,7 @@ import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-function ProductPage({ addToCart }) {
+function ProductPage({ Cart, setCartlist }) {
   const { productId } = useParams();
 
   const [isSelected, setIsSelected] = useState(false);
@@ -19,8 +19,15 @@ function ProductPage({ addToCart }) {
     return <div>Product not found</div>;
   }
 
-  const handleAddToCart = () => {
-    addToCart(product);
+  const handleAddToCart = (productID) => {
+    setCartlist((prev) => {
+      const updatedCartlist = prev.includes(productID)
+        ? prev
+        : [...prev, productID];
+        localStorage.setItem("cartlist", JSON.stringify(updatedCartlist));
+      return updatedCartlist;
+    });
+    Cart(product);
     setToastMessage(`${product.name} has been added to your cart`);
     setShowToast(true);
     setTimeout(() => {
@@ -47,7 +54,7 @@ function ProductPage({ addToCart }) {
     setShowToast(false);
   };
 
-  const uniqueSizes = [...new Set(products.flatMap(item => item.sizes))];
+  const uniqueSizes = [...new Set(products.flatMap((item) => item.sizes))];
 
   return (
     <div className="container">
@@ -129,7 +136,7 @@ function ProductPage({ addToCart }) {
             <span>&times;</span>
           </button>
         </div>
-        <div className="toast-body">{toastMessage}</ div>
+        <div className="toast-body">{toastMessage}</div>
       </div>
     </div>
   );

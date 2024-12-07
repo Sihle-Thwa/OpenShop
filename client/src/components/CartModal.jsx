@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
+import { BsTrash } from 'react-icons/bs';
 
 // eslint-disable-next-line react/prop-types
-function CartModal({ onClose, cartItems }) {
+function CartModal({ onClose, cart, setCartlist }) {
+
+    const handleRemoveFromCart = (productID) => {
+        const updatedCartlist = cart.filter((item) => item.id !== productID);
+        setCartlist(updatedCartlist);
+        localStorage.setItem("cartlist", JSON.stringify(updatedCartlist));
+    }
+    
   return (
     <div
       className="modal fade show"
@@ -22,8 +30,8 @@ function CartModal({ onClose, cartItems }) {
             ></button>
           </div>
           <div className="modal-body">
-            {cartItems.length > 0 ? (
-              cartItems.map((item) => (
+            {cart.length > 0 ? (
+              cart.map((item) => (
                 <div key={item.id} className="d-flex justify-content-between">
                   <div>{item.name}</div>
                   <div>Quantity: {item.quantity}</div>
@@ -32,6 +40,10 @@ function CartModal({ onClose, cartItems }) {
             ) : (
               <div>Your cart is empty.</div>
             )}
+            <button className='btn btn-danger btn-sm ms-2'
+            onClick={()=> handleRemoveFromCart(productID)}>
+                <BsTrash />
+            </button>
           </div>
           <div className="modal-footer">
             <button
@@ -51,6 +63,8 @@ function CartModal({ onClose, cartItems }) {
   );
 }
 CartModal.propTypes = {
+    cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+    setCartlist: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   cartItems: PropTypes.arrayOf(
     PropTypes.shape({
