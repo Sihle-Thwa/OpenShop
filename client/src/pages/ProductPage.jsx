@@ -69,6 +69,15 @@ function ProductPage({ setCart }) {
 
   const uniqueSizes = [...new Set(products.flatMap((item) => item.sizes))];
 
+  //Get Products in the same category for related products
+  const getProductsByCategory = (category) => {
+    return products.filter(
+      (item) => item.category === category && item.id !== productId
+    );
+  };
+
+  const relatedProducts = getProductsByCategory(product.category);
+
   return (
     <div className="container">
       <div className="row">
@@ -121,6 +130,27 @@ function ProductPage({ setCart }) {
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
+
+        <div className="row p-4">
+          <h3>Related Products</h3>
+          <div className=" row related-products">
+            {relatedProducts.length > 0 ? (
+              relatedProducts.map((item) => (
+                <div key={item.id} className="">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={{ height: 250, width: 250 }}
+                  />
+                  <p>{item.name}</p>
+                  <p>R{item.price}</p>
+                </div>
+              ))
+            ) : (
+              <p>No related products found</p>
+            )}
           </div>
         </div>
       </div>
