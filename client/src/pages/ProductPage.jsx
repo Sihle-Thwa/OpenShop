@@ -2,11 +2,10 @@ import { useParams } from "react-router-dom";
 import { products } from "../assets/products.js"; // Adjust the path as necessary
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
-function ProductPage({ Cart, setCartlist }) {
+function ProductPage({ setCart }) {
   const { productId } = useParams();
-
   const [isSelected, setIsSelected] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
@@ -19,17 +18,31 @@ function ProductPage({ Cart, setCartlist }) {
     return <div>Product not found</div>;
   }
 
-  const handleAddToCart = (productID) => {
-    setCartlist((prev) => {
-      const updatedCartlist = prev.includes(productID)
-        ? prev
-        : [...prev, productID];
-        localStorage.setItem("cartlist", JSON.stringify(updatedCartlist));
-      return updatedCartlist;
+  const handleCartUpdate = () => {
+    // Set the toast message based on whether the product was added or removed
+    setCart((prev) => {
+      const isProductInCart = prev.some((item) => item.id === product.id);
+      const updatedCartList = isProductInCart
+        ? prev.filter((item) => item.id !== product.id)
+        : [
+            ...prev,
+            { id: product.id, name: product.name, price: product.price },
+          ];
+      localStorage.setItem("cart", JSON.stringify(updatedCartList));
+      setToastMessage(
+        `${product.name} has been ${
+          isProductInCart ? "removed from" : "added to"
+        } your cart`
+      );
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+      return updatedCartList;
     });
-    Cart(product);
-    setToastMessage(`${product.name} has been added to your cart`);
     setShowToast(true);
+
+    // Hide the toast message after 3 seconds
     setTimeout(() => {
       setShowToast(false);
     }, 3000);
@@ -79,7 +92,7 @@ function ProductPage({ Cart, setCartlist }) {
           </div>
           <div className="row d d-flex justify-content-between align-items-center">
             <div className="col-10">
-              <button className="add-cart-btn w-100" onClick={handleAddToCart}>
+              <button className="add-cart-btn w-100" onClick={handleCartUpdate}>
                 Add to cart
               </button>
             </div>
@@ -126,7 +139,7 @@ function ProductPage({ Cart, setCartlist }) {
           opacity: showToast ? 1 : 0,
         }}
       >
-        <div className="toast-header justify-content-between">
+        <div className=" toast-header justify-content-between">
           <strong className="mr-auto">Notification</strong>
           <button
             type="button"
@@ -141,5 +154,16 @@ function ProductPage({ Cart, setCartlist }) {
     </div>
   );
 }
+
+ProductPage.propTypes = {
+  cart: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+    })
+  ),
+  setCart: PropTypes.func,
+};
 
 export default ProductPage;

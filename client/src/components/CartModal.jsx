@@ -1,19 +1,14 @@
-import PropTypes from 'prop-types';
-import { BsTrash } from 'react-icons/bs';
+import PropTypes from "prop-types";
+import { BsTrash } from "react-icons/bs";
 
 // eslint-disable-next-line react/prop-types
-function CartModal({ onClose, cart, setCartlist }) {
+function CartModal({ onClose, cart }) {
+  // Create a function to handle item removal from the cart
 
-    const handleRemoveFromCart = (productID) => {
-        const updatedCartlist = cart.filter((item) => item.id !== productID);
-        setCartlist(updatedCartlist);
-        localStorage.setItem("cartlist", JSON.stringify(updatedCartlist));
-    }
-    
   return (
     <div
       className="modal fade show"
-      style={{ display: 'block' }} // Ensure the modal is visible
+      style={{ display: "block" }} // Ensure the modal is visible
       tabIndex="-1"
       aria-labelledby="cartModalLabel"
       aria-hidden="true"
@@ -21,7 +16,9 @@ function CartModal({ onClose, cart, setCartlist }) {
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="cartModalLabel">Cart</h5>
+            <h5 className="modal-title" id="cartModalLabel">
+              Cart
+            </h5>
             <button
               type="button"
               className="btn-close"
@@ -32,18 +29,21 @@ function CartModal({ onClose, cart, setCartlist }) {
           <div className="modal-body">
             {cart.length > 0 ? (
               cart.map((item) => (
-                <div key={item.id} className="d-flex justify-content-between">
+                <div
+                  key={item.id}
+                  className="d-flex justify-content-between align-items-center"
+                >
                   <div>{item.name}</div>
-                  <div>Quantity: {item.quantity}</div>
+                  <div>Quantity: 1</div>{" "}
+                  {/* Assuming quantity is always 1 for simplicity */}
+                  <button className="btn btn-danger btn-sm ms-2">
+                    <BsTrash />
+                  </button>
                 </div>
               ))
             ) : (
               <div>Your cart is empty.</div>
             )}
-            <button className='btn btn-danger btn-sm ms-2'
-            onClick={()=> handleRemoveFromCart(productID)}>
-                <BsTrash />
-            </button>
           </div>
           <div className="modal-footer">
             <button
@@ -62,17 +62,16 @@ function CartModal({ onClose, cart, setCartlist }) {
     </div>
   );
 }
+
 CartModal.propTypes = {
-    cart: PropTypes.arrayOf(PropTypes.object).isRequired,
-    setCartlist: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-  cartItems: PropTypes.arrayOf(
+  cart: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
     })
   ).isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default CartModal;

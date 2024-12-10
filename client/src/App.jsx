@@ -5,48 +5,32 @@ import Home from "./pages/Home";
 import Collection from "./pages/Collection";
 import Footer from "./components/Footer";
 import ProductPage from "./pages/ProductPage";
-import CartModal from "./components/CartModal";
 import { useState } from "react";
+import CartModal from "./components/CartModal";
 
 function App() {
-  const [showCartModal, setShowCartModal] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const addToCart = (product) => {
-    const existingItem = cartItems.find((item) => item.id === product.id);
-
-    if (existingItem) {
-      // Update quantity if item already exists in the cart
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        )
-      );
-    } else {
-      // Add new item to the cart
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }
+  const handleOpenCart = () => {
+    setIsCartOpen(true);
   };
 
-  const handleOpenModal = () => {
-    setShowCartModal(true);
+  const handleCloseCart = () => {
+    setIsCartOpen(false);
   };
-
-  const handleCloseModal = () => {
-    setShowCartModal(false);
-  };
-
   return (
     <BrowserRouter>
-      <NavBar onOpenCart={handleOpenModal} />
-      {showCartModal && (
-        <CartModal onClose={handleCloseModal} cartItems={cartItems} />
-      )}
+      <NavBar onOpenCart={handleOpenCart} />
+      {isCartOpen && <CartModal onClose={handleCloseCart} cart={cart} />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/collection" element={<Collection />} />
-        <Route path="/product/:productId" element={<ProductPage addToCart={addToCart} />} />
+        <Route
+          path="/product/:productId"
+          element={<ProductPage cart={cart} setCart={setCart} />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>
