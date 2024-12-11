@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import ProductPage from "./pages/ProductPage";
 import { useState } from "react";
 import CartModal from "./components/CartModal";
+import ShopBy from "./pages/ShopBy";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -31,6 +32,7 @@ function App() {
           path="/product/:productId"
           element={<ProductPage cart={cart} setCart={setCart} />}
         />
+        <Route path="/shopby" element={<ShopBy />} />
       </Routes>
       <Footer />
     </BrowserRouter>

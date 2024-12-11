@@ -1,0 +1,53 @@
+.container {
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.row {
+    margin-bottom: 20px; /* Space between rows */
+}
+
+.shopby-category {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Set a fixed height for consistency */
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.shopby-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio */
+}
+
+.shopby-text {
+    position: absolute;
+    top: 20%; /* Adjust as needed */
+    left: 15%; /* Adjust as needed */
+    transform: translate(-50%, -50%);
+    color: black; /* Change to white for better visibility */
+    font-size: 2rem;
+    font-weight: bold;
+    z-index: 1; /* Ensure text is above the image */
+}
+
+.shopby-button {
+    position: absolute;
+    top: 50%; /* Adjust as needed */
+    left: 10%; /* Adjust as needed */
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1; /* Ensure button is above the image */
+}
+
+.shopby-button:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+}

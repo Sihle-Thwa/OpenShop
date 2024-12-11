@@ -52,8 +52,8 @@ function NavBar({ onOpenCart }) {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">
-                About
+              <a className="nav-link" href="/shopby">
+                Categories
               </a>
             </li>
             <li className="nav-item">
