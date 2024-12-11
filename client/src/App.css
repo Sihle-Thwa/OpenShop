@@ -59,3 +59,16 @@
     height: 150px; /* Adjust height for smaller screens */
   }
 }
+
+.add-cart-btn {
+  border-style: solid;
+  border-color: black;
+  background-color: white;
+}
+
+.buy-now-btn {
+border-style: solid;
+background-color: black;
+color: white;
+
+}

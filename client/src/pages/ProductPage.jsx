@@ -101,10 +101,13 @@ function ProductPage({ setCart }) {
             <h2>R{product.price}</h2>
           </div>
           <div className="row d d-flex justify-content-between align-items-center">
-            <div className="col-10">
+            <div className="col-10 mb-4">
               <button className="add-cart-btn w-100" onClick={handleCartUpdate}>
                 Add to cart
               </button>
+            </div>
+            <div className="col-10 ">
+              <button className="buy-now-btn w-100">Buy Now</button>
             </div>
             <div className="col-2">
               <button
