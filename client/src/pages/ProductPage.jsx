@@ -3,6 +3,7 @@ import { products } from "../assets/products.js"; // Adjust the path as necessar
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import ProductCard from "../components/ProductCard.jsx";
 
 function ProductPage({ setCart }) {
   const { productId } = useParams();
@@ -133,19 +134,13 @@ function ProductPage({ setCart }) {
           </div>
         </div>
 
-        <div className="row p-4">
+        <div className="row  p-1">
           <h3>Related Products</h3>
-          <div className=" row related-products">
+          <div className="d-flex md-4 sm-2   related-products">
             {relatedProducts.length > 0 ? (
               relatedProducts.map((item) => (
                 <div key={item.id} className="">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    style={{ height: 250, width: 250 }}
-                  />
-                  <p>{item.name}</p>
-                  <p>R{item.price}</p>
+                  <ProductCard product={item} />
                 </div>
               ))
             ) : (
