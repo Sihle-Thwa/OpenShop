@@ -16,7 +16,10 @@ function Collection() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   // Get the current items to display
-  const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   // Function to handle page change
   const handlePageChange = (pageNumber) => {
@@ -27,9 +30,11 @@ function Collection() {
   const handleFilterChange = (filters) => {
     const { category, subCategory, size } = filters;
 
-    const filtered = products.filter(product => {
+    const filtered = products.filter((product) => {
       const matchesCategory = category ? product.category === category : true;
-      const matchesSubCategory = subCategory ? product.subCategory === subCategory : true;
+      const matchesSubCategory = subCategory
+        ? product.subCategory === subCategory
+        : true;
       const matchesSize = size ? product.sizes.includes(size) : true;
 
       return matchesCategory && matchesSubCategory && matchesSize;
@@ -44,7 +49,10 @@ function Collection() {
       <div className="row">
         {/* Filter Section */}
         <div className="col-md-3 mb-4">
-          <FilterComponent products={products} onFilterChange={handleFilterChange} />
+          <FilterComponent
+            products={products}
+            onFilterChange={handleFilterChange}
+          />
         </div>
 
         {/* Products Section */}
@@ -68,7 +76,7 @@ function Collection() {
                   key={index}
                 >
                   <button
-                    className="page-link"
+                    className="page-link bg-dark text-white"
                     onClick={() => handlePageChange(index + 1)}
                   >
                     {index + 1}
