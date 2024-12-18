@@ -48,7 +48,7 @@ function Collection() {
     <div className="container">
       <div className="row">
         {/* Filter Section */}
-        <div className="col-md-3 mb-4">
+        <div className="col-lg-3 col-md-4 mb-4">
           <FilterComponent
             products={products}
             onFilterChange={handleFilterChange}
@@ -56,10 +56,10 @@ function Collection() {
         </div>
 
         {/* Products Section */}
-        <div className="col-md-9">
+        <div className="col-lg-9 col-md-8">
           <div className="row">
             {currentItems.map((product) => (
-              <div className="col-md-4 mb-4" key={product.id}>
+              <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={product.id}>
                 <ProductCard product={product} />
               </div>
             ))}
