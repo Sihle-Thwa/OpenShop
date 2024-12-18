@@ -1,10 +1,10 @@
 import { BsBag, BsPerson, BsSearch } from "react-icons/bs";
 import { useEffect, useState, useRef } from "react";
 
-// eslint-disable-next-line react/prop-types
 function NavBar({ onOpenCart }) {
   const [sticky, setSticky] = useState(false);
-  const navbar = useRef(null);
+  const [isNavOpen, setIsNavOpen] = useState(false); // State to manage navbar visibility
+
   const navbarOffset = useRef(null);
 
   useEffect(() => {
@@ -17,61 +17,71 @@ function NavBar({ onOpenCart }) {
 
     window.addEventListener("scroll", handleScroll);
 
-    if (navbar.current) {
-      navbar.current.style.height = `${
-        navbar.current.getBoundingClientRect().height
-      }px`;
-    }
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  const toggleNavbar = () => {
+    setIsNavOpen(!isNavOpen); // Toggle the navbar visibility
+  };
+
   return (
     <nav
       ref={navbarOffset}
-      className={`navbar navbar-expand-lg justify-content-between d-flex ${
+      className={`navbar navbar-expand-lg d-flex justify-content-between ${
         sticky ? "sticky" : ""
       }`}
     >
-      <div className="container justify-content-between d-flex">
+      <div className="container d-flex justify-content-between align-items-center">
         <div className="nav-left">
-          <div className="nav-brand">OpenShop</div>
+          <div className="navbar-brand">OpenShop</div>
         </div>
-        <div className="nav-centre">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="/home">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/collection">
-                Collection
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/shopby">
-                Categories
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="nav-right">
-          <button type="button" className="btn" onClick={onOpenCart}>
-            <BsBag />
-          </button>
-          <button type="button" className="btn">
-            <BsPerson />
-          </button>
-          <button type="button" className="btn">
-            <BsSearch />
-          </button>
+        <button
+          className="navbar-toggler"
+          type="button"
+          onClick={toggleNavbar}
+          aria-controls="navbarNav"
+          aria-expanded={isNavOpen}
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`} id="navbarNav">
+          <div className="nav-centre mx-auto">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a className="nav-link" href="/home">
+                  Home
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/collection">
+                  Collection
+                </a>
+              </li>
+              
+            </ul>
+          </div>
+          <div className="nav-right">
+            <button type="button" className="btn" onClick={onOpenCart}>
+              <BsBag />
+            </button>
+            <button type="button" className="btn">
+              <BsPerson />
+            </button>
+            <button type="button" className="btn">
+              <BsSearch />
+            </button>
+          </div>
         </div>
       </div>
     </nav>
   );
 }
+
+NavBar.propTypes = {
+  onOpenCart: () => {},
+};
 
 export default NavBar;

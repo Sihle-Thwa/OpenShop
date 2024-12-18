@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { BsTrash } from "react-icons/bs";
 
-// eslint-disable-next-line react/prop-types
 function CartModal({ onClose, cart }) {
   // Create a function to handle item removal from the cart
 
