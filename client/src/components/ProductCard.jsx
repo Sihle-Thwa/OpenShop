@@ -41,14 +41,14 @@ function ProductCard({ product }) {
           alt={product.name}
           onClick={handleProductClick}
           style={{ cursor: "pointer" }}
-          className="product-image"
+          className="product-image img-fluid" // Make the image responsive
         />
-        <div className="row d-flex justify-content-between align-items-center">
-          <div className="col-10 text-start">{product.name}</div>
+        <div className="row d-flex justify-content-between align-items-center mt-2">
+          <div className="col-8 col-md-10 text-start">{product.name}</div>
           <span
             role="button"
             tabIndex="0"
-            className={`col-2 p-1 rounded-circle d-flex justify-content-center align-items-center`}
+            className={`col-4 col-md-2 p-1 rounded-circle d-flex justify-content-center align-items-center`}
             onClick={handleClick}
             onKeyPress={(e) => e.key === "Enter" && handleClick()} // Allows keyboard interaction
             style={{ cursor: "pointer" }}
@@ -60,7 +60,7 @@ function ProductCard({ product }) {
             )}
           </span>
         </div>
-        <div className="row d-flex justify-content-between">
+        <div className="row d-flex justify-content-between mt-1">
           <div className="col-6 text-start">R{product.price}</div>
         </div>
       </div>
