@@ -41,12 +41,6 @@ function ProductPage({ setCart }) {
       }, 3000);
       return updatedCartList;
     });
-    setShowToast(true);
-
-    // Hide the toast message after 3 seconds
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
   };
 
   const handleClick = () => {
@@ -70,7 +64,7 @@ function ProductPage({ setCart }) {
 
   const uniqueSizes = [...new Set(products.flatMap((item) => item.sizes))];
 
-  //Get Products in the same category for related products
+  // Get Products in the same category for related products
   const getProductsByCategory = (category) => {
     return products.filter(
       (item) => item.category === category && item.id !== productId
@@ -82,15 +76,15 @@ function ProductPage({ setCart }) {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-6">
+        <div className="col-lg-6 col-md-12">
           <img
             src={product.image}
-            style={{ height: "600px" }}
             alt={product.name}
-            className="product-image"
+            className="product-image img-fluid" // Make the image responsive
+            style={{ height: "auto", maxHeight: "600px", width: "100%" }} // Maintain aspect ratio
           />
         </div>
-        <div className="col-6">
+        <div className="col-lg-6 col-md-12">
           <div className="row text-start pb-2">
             <h4>{product.name}</h4>
           </div>
@@ -100,20 +94,20 @@ function ProductPage({ setCart }) {
           <div className="row text-start pb-2">
             <h2>R{product.price}</h2>
           </div>
-          <div className="row d d-flex justify-content-between align-items-center">
-            <div className="col-10 mb-4">
+          <div className="row d-flex justify-content-between align-items-center">
+            <div className="col-12 mb-4">
               <button className="add-cart-btn w-100" onClick={handleCartUpdate}>
                 Add to cart
               </button>
             </div>
-            <div className="col-10 ">
+            <div className="col-12 mb-4">
               <button className="buy-now-btn w-100">Buy Now</button>
             </div>
             <div className="col-2">
               <button
                 role="button"
                 tabIndex="0"
-                className={`p-1 d-flex `}
+                className={`p-1 d-flex justify-content-center`}
                 onClick={handleClick}
                 onKeyPress={(e) => e.key === "Enter" && handleClick()} // Allows keyboard interaction
                 style={{ cursor: "pointer" }}
@@ -128,21 +122,23 @@ function ProductPage({ setCart }) {
           </div>
           <div className="row">
             <div className="row p-4">
-              <ul className="d-flex justify-content-between">
+              <ul className="d-flex justify-content-between flex-wrap">
                 {uniqueSizes.map((sz) => (
-                  <button key={sz}>{sz}</button>
+                  <button key={sz} className="btn btn-outline-secondary m-1">
+                    {sz}
+                  </button>
                 ))}
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="row  p-1">
+        <div className="row p-1">
           <h3>Related Products</h3>
-          <div className="d-flex md-4 sm-2   related-products">
+          <div className="d-flex flex-wrap justify-content-start related-products">
             {relatedProducts.length > 0 ? (
               relatedProducts.map((item) => (
-                <div key={item.id} className="">
+                <div key={item.id} className="col-6 col-md-4 col-lg-3 mb-3">
                   <ProductCard product={item} />
                 </div>
               ))
@@ -167,7 +163,7 @@ function ProductPage({ setCart }) {
           opacity: showToast ? 1 : 0,
         }}
       >
-        <div className=" toast-header justify-content-between">
+        <div className="toast-header justify-content-between">
           <strong className="mr-auto">Notification</strong>
           <button
             type="button"
