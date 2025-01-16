@@ -28,13 +28,13 @@ function Home() {
             className="btn btn-link text-decoration-none text-black"
             onClick={() => handleGenderSelection("female")}
           >
-            <h6 className="p-4">FOR HER</h6>
+            <h6 className="p-4 btn-for">FOR HER</h6>
           </button>
           <button
             className="btn btn-link text-decoration-none text-black"
             onClick={() => handleGenderSelection("male")}
           >
-            <h6 className="p-4">FOR HIM</h6>
+            <h6 className="p-4 btn-for">FOR HIM</h6>
           </button>
         </div>
       </div>

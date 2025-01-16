@@ -112,3 +112,8 @@ color: white;
 
 }
 
+.btn-for:hover {
+  background-color: lightgray;
+  color: black;
+}
+
