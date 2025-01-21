@@ -2,7 +2,10 @@ import PropTypes from "prop-types";
 import { BsTrash } from "react-icons/bs";
 
 function CartModal({ onClose, cart }) {
-  // Create a function to handle item removal from the cart
+  // Function to calculate the total price of items in the cart
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+  };
 
   return (
     <div
@@ -33,8 +36,8 @@ function CartModal({ onClose, cart }) {
                   className="d-flex justify-content-between align-items-center"
                 >
                   <div>{item.name}</div>
-                  <div>Quantity: 1</div>{" "}
-                  {/* Assuming quantity is always 1 for simplicity */}
+                  <div>Quantity: 1</div>
+                  <div>R{item.price.toFixed(2)}</div> {/* Format price to 2 decimal places */}
                   <button className="btn btn-danger btn-sm ms-2">
                     <BsTrash />
                   </button>
@@ -45,6 +48,11 @@ function CartModal({ onClose, cart }) {
             )}
           </div>
           <div className="modal-footer">
+            {cart.length > 0 && (
+              <div className="w-100 text-end">
+                <strong>Total: R{calculateTotal()}</strong>
+              </div>
+            )}
             <button
               type="button"
               className="btn btn-secondary"

@@ -1,11 +1,11 @@
-import "./App.css";
-import NavBar from "./components/NavBar";
+// App.jsx
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Collection from "./pages/Collection";
-import Footer from "./components/Footer";
 import ProductPage from "./pages/ProductPage";
-import { useState } from "react";
+import Footer from "./components/Footer";
 import CartModal from "./components/CartModal";
 
 function App() {
@@ -19,20 +19,33 @@ function App() {
   const handleCloseCart = () => {
     setIsCartOpen(false);
   };
+
+  // Function to handle adding products to the cart
+  const handleAddToCart = (product) => {
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === product.id);
+      if (existingProduct) {
+        // If the product already exists in the cart, increase the quantity
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        // If the product does not exist, add it to the cart with quantity 1
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+  };
+
   return (
     <BrowserRouter>
       <NavBar onOpenCart={handleOpenCart} />
-      
       {isCartOpen && <CartModal onClose={handleCloseCart} cart={cart} />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/collection" element={<Collection />} />
-        <Route
-          path="/product/:productId"
-          element={<ProductPage cart={cart} setCart={setCart} />}
-        />
-       
+        <Route path="/collection" element={<Collection onAddToCart={handleAddToCart} />} />
+        <Route path="/product/:productId" element={<ProductPage onAddToCart={handleAddToCart} />} />
       </Routes>
       <Footer />
     </BrowserRouter>

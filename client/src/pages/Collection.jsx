@@ -1,9 +1,11 @@
+// Collection.jsx
 import { useState } from "react";
+import PropTypes from "prop-types";
 import ProductCard from "../components/ProductCard"; // Adjust the path as necessary
 import { products } from "../assets/products"; // Adjust the path as necessary
 import FilterComponent from "../components/FilterComponent"; // Import the FilterComponent
 
-function Collection() {
+function Collection({ onAddToCart }) {
   const itemsPerPage = 9; // Number of items to display per page
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const [filteredProducts, setFilteredProducts] = useState(products); // State for filtered products
@@ -31,11 +33,9 @@ function Collection() {
     const { category, subCategory, size } = filters;
 
     const filtered = products.filter((product) => {
-      const matchesCategory = category ? product.category === category : true;
-      const matchesSubCategory = subCategory
-        ? product.subCategory === subCategory
-        : true;
-      const matchesSize = size ? product.sizes.includes(size) : true;
+      const matchesCategory = category ? category.includes(product.category) : true;
+      const matchesSubCategory = subCategory ? subCategory.includes(product.subCategory) : true;
+      const matchesSize = size ? size.some(s => product.sizes.includes(s)) : true;
 
       return matchesCategory && matchesSubCategory && matchesSize;
     });
@@ -45,7 +45,7 @@ function Collection() {
   };
 
   return (
-    <div className="container">
+    <div className ="container">
       <div className="row">
         {/* Filter Section */}
         <div className="col-lg-3 col-md-4 mb-4">
@@ -60,7 +60,7 @@ function Collection() {
           <div className="row">
             {currentItems.map((product) => (
               <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={product.id}>
-                <ProductCard product={product} />
+                <ProductCard product={product} onAddToCart={onAddToCart} />
               </div>
             ))}
           </div>
@@ -90,5 +90,10 @@ function Collection() {
     </div>
   );
 }
+
+// Prop validation
+Collection.propTypes = {
+  onAddToCart: PropTypes.func.isRequired,
+};
 
 export default Collection;

@@ -4,7 +4,7 @@ import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ProductCard({ product }) {
+function ProductCard({ product, onAddToCart }) {
   const navigate = useNavigate();
   const [isSelected, setIsSelected] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -31,6 +31,15 @@ function ProductCard({ product }) {
 
   const handleProductClick = () => {
     navigate(`/product/${product.id}`); // Redirect to the product page
+  };
+
+  const handleAddToCart = () => {
+    onAddToCart(product); // Call the function passed as a prop
+    setToastMessage(`${product.name} has been added to your cart`);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
   };
 
   return (
@@ -62,6 +71,9 @@ function ProductCard({ product }) {
         </div>
         <div className="row d-flex justify-content-between mt-1">
           <div className="col-6 text-start">R{product.price}</div>
+          <button className="btn btn-primary" onClick={handleAddToCart}>
+            Add to Cart
+          </button>
         </div>
       </div>
 
@@ -80,7 +92,7 @@ function ProductCard({ product }) {
         }}
       >
         <div className="toast-header justify-content-between">
-          <strong className="mr-auto">Wishlist Notification</strong>
+          <strong className="mr-auto">Notification</strong>
           <button
             type="button"
             className="btn ml-2 mb-1 close"
@@ -103,6 +115,7 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
+  onAddToCart: PropTypes.func.isRequired, // New prop for adding to cart
 };
 
 export default ProductCard;
