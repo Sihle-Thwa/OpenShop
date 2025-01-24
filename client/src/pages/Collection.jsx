@@ -12,10 +12,9 @@ function Collection({ onAddToCart }) {
   // Calculate the total number of pages
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
-  // Calculate the index of the first and last item on the current page
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
+// Calculate the index of the first and last item on the current page
+const indexOfLastItem = currentPage * itemsPerPage;
+const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   // Get the current items to display
   const currentItems = filteredProducts.slice(
     indexOfFirstItem,
@@ -55,7 +54,7 @@ function Collection({ onAddToCart }) {
         </div>
 
         {/* Products Section */}
-        <div className="col-lg-9 col-md-8">
+        <div className="col-lg-9 col-md-8 mb-1">
           <div className="row">
             {currentItems.map((product) => (
               <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={product.id}>
@@ -66,24 +65,54 @@ function Collection({ onAddToCart }) {
 
           {/* Pagination Controls */}
           <nav aria-label="Page navigation">
-            <ul className="pagination justify-content-center">
-              {Array.from({ length: totalPages }, (_, index) => (
-                <li
-                  className={`page-item ${
-                    currentPage === index + 1 ? "active" : ""
-                  }`}
-                  key={index}
-                >
-                  <button
-                    className="page-link bg-dark text-white"
-                    onClick={() => handlePageChange(index + 1)}
-                  >
-                    {index + 1}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </nav>
+    <ul className="pagination justify-content-center">
+      {/* Previous Button */}
+      <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+        <button
+          className="page-link bg-white text-black"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          &laquo; 
+        </button>
+      </li>
+
+      {/* Page Numbers */}
+      {Array.from({ length: totalPages }, (_, index) => (
+        <li
+          className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
+          key={index}
+        >
+          <button
+            className={`page-link ${
+              currentPage === index + 1 ? "bg-black text-white" : "bg-white text-black"
+            }`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        </li>
+      ))}
+
+      {/* Next Button */}
+      <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+        <button
+          className="page-link bg-white text-black"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+           &raquo;
+        </button>
+      </li>
+    </ul>
+
+    {/* Current Page and Total Pages Display */}
+    <div className="text-center mt-2">
+      <span className="text-black">
+        Page {currentPage} of {totalPages}
+      </span>
+    </div>
+  </nav>
         </div>
       </div>
     </div>

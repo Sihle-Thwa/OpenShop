@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 
 function NavBar({ onOpenCart }) {
   const [sticky, setSticky] = useState(false);
-  const [isNavOpen, setIsNavOpen] = useState(false); // State to manage navbar visibility
+  const [isNavOpen, setIsNavOpen] = useState(false); 
 
   const navbarOffset = useRef(null);
 
@@ -23,7 +23,7 @@ function NavBar({ onOpenCart }) {
   }, []);
 
   const toggleNavbar = () => {
-    setIsNavOpen(!isNavOpen); // Toggle the navbar visibility
+    setIsNavOpen(!isNavOpen); 
   };
 
   return (

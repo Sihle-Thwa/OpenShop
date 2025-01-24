@@ -113,3 +113,12 @@
   border-radius: 10px;
 }
 
+.pagination .page-item.disabled .page-link {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: black;
+  color: white;
+}
