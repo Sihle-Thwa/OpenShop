@@ -43,7 +43,8 @@ function App() {
       <NavBar onOpenCart={handleOpenCart} />
       {isCartOpen && <CartModal onClose={handleCloseCart} cart={cart} />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="/collection" element={<Collection onAddToCart={handleAddToCart} />} />
         <Route path="/product/:productId" element={<ProductPage onAddToCart={handleAddToCart} />} />
       </Routes>

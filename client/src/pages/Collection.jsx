@@ -1,9 +1,8 @@
-// Collection.jsx
 import { useState } from "react";
 import PropTypes from "prop-types";
-import ProductCard from "../components/ProductCard"; // Adjust the path as necessary
-import { products } from "../assets/products"; // Adjust the path as necessary
-import FilterComponent from "../components/FilterComponent"; // Import the FilterComponent
+import ProductCard from "../components/ProductCard"; 
+import { products } from "../assets/products"; 
+import FilterComponent from "../components/FilterComponent"; 
 
 function Collection({ onAddToCart }) {
   const itemsPerPage = 9; // Number of items to display per page
@@ -41,7 +40,7 @@ function Collection({ onAddToCart }) {
     });
 
     setFilteredProducts(filtered);
-    setCurrentPage(1); // Reset to first page when filters change
+    setCurrentPage(1); 
   };
 
   return (
@@ -88,12 +87,12 @@ function Collection({ onAddToCart }) {
         </div>
       </div>
     </div>
+    
   );
 }
 
-// Prop validation
 Collection.propTypes = {
   onAddToCart: PropTypes.func.isRequired,
 };
-
 export default Collection;
+

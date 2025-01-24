@@ -1,33 +1,32 @@
-/* src/Home.css */
-
 .image-grid {
     display: flex;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
-    gap: 16px; /* Space between images */
-    padding: 16px; /* Padding around the grid */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 16px; 
+    padding: 16px; 
 }
   
 .image-container {
-    overflow: hidden; /* Prevent overflow */
-    border-radius: 8px; /* Optional: rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: shadow effect */
+    overflow: hidden; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
   
 .image-container img {
-    width: 100%; /* Make images responsive */
-    height: auto; /* Maintain aspect ratio */
-    display: flex; /* Remove bottom space */
+    width: 100%; 
+    height: auto; 
+    display: flex; 
 }
 
 .buy-now-btn {
     border-style:solid;
     background-color: black;
     color: white;
+    border-radius: 10px;
 }
 
 .btn-for:hover {
   border-style: solid;
   background-color: black;
   color: white;
-  border-radius: 15px;
+  border-radius: 12px;
 }  

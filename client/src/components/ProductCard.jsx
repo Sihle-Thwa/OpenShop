@@ -30,11 +30,11 @@ function ProductCard({ product, onAddToCart }) {
   };
 
   const handleProductClick = () => {
-    navigate(`/product/${product.id}`); // Redirect to the product page
+    navigate(`/product/${product.id}`); 
   };
 
   const handleAddToCart = () => {
-    onAddToCart(product); // Call the function passed as a prop
+    onAddToCart(product); 
     setToastMessage(`${product.name} has been added to your cart`);
     setShowToast(true);
     setTimeout(() => {
@@ -50,7 +50,7 @@ function ProductCard({ product, onAddToCart }) {
           alt={product.name}
           onClick={handleProductClick}
           style={{ cursor: "pointer" }}
-          className="product-image img-fluid" // Make the image responsive
+          className="product-image img-fluid" 
         />
         <div className="row d-flex justify-content-between align-items-center mt-2">
           <div className="col-8 col-md-10 text-start">{product.name}</div>
@@ -59,7 +59,7 @@ function ProductCard({ product, onAddToCart }) {
             tabIndex="0"
             className={`col-4 col-md-2 p-1 rounded-circle d-flex justify-content-center align-items-center`}
             onClick={handleClick}
-            onKeyPress={(e) => e.key === "Enter" && handleClick()} // Allows keyboard interaction
+            onKeyPress={(e) => e.key === "Enter" && handleClick()} 
             style={{ cursor: "pointer" }}
           >
             {isSelected ? (
@@ -71,7 +71,7 @@ function ProductCard({ product, onAddToCart }) {
         </div>
         <div className="row d-flex justify-content-between mt-1">
           <div className="col-6 text-start">R{product.price}</div>
-          <button className="btn btn-primary" onClick={handleAddToCart}>
+          <button className="btn add-cart-btn" onClick={handleAddToCart}>
             Add to Cart
           </button>
         </div>
@@ -115,7 +115,7 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
-  onAddToCart: PropTypes.func.isRequired, // New prop for adding to cart
+  onAddToCart: PropTypes.func.isRequired, 
 };
 
 export default ProductCard;

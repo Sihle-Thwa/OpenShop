@@ -1,10 +1,10 @@
 import { useState } from "react";
 import TopHeader from "../components/TopHeader";
-import { femaleImages, maleImages } from "../assets/headerImages"; // Adjust the path as necessary
-import "./Home.css"; // Import a CSS file for styling
+import { femaleImages, maleImages } from "../assets/headerImages"; 
+import "./Home.css";
 import Banner from "../components/Banner";
 import ProductCard from "../components/ProductCard";
-import { products } from "../assets/products"; // Adjust the path as necessary
+import { products } from "../assets/products"; 
 
 function Home() {
   const [selectedImages, setSelectedImages] = useState(femaleImages); // Default to female images
