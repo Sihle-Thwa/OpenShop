@@ -122,3 +122,39 @@
   background-color: black;
   color: white;
 }
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  }
+
+  li{
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-container input {
+    padding: 10px;
+    margin-right: 10px;
+    width: 300px; /* Adjust width as needed */
+  }
+  
+  .btn-close {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }

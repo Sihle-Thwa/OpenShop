@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 function NavBar({ onOpenCart }) {
   const [sticky, setSticky] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false); 
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const navbarOffset = useRef(null);
 
@@ -24,6 +25,13 @@ function NavBar({ onOpenCart }) {
 
   const toggleNavbar = () => {
     setIsNavOpen(!isNavOpen); 
+  };
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+    if(isSearchOpen){
+      setIsNavOpen(false);
+    }
   };
 
   return (
@@ -48,6 +56,8 @@ function NavBar({ onOpenCart }) {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`} id="navbarNav">
+          {!isSearchOpen ?(
+            <>
           <div className="nav-centre mx-auto">
             <ul className="navbar-nav">
               <li className="nav-item">
@@ -70,10 +80,24 @@ function NavBar({ onOpenCart }) {
             <button type="button" className="btn">
               <BsPerson />
             </button>
-            <button type="button" className="btn">
+            <button type="button" className="btn" onClick={toggleSearch}>
               <BsSearch />
             </button>
-          </div>
+          </div>  
+            </>
+          ) : (
+            <div className="search-container mx-auto">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="form-control"
+              />
+              <button className="btn btn-close" onClick={toggleSearch}>
+                
+              </button>
+            </div>
+          ) }
+          
         </div>
       </div>
     </nav>
