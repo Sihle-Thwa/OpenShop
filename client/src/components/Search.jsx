@@ -1,36 +1,35 @@
-import { useState, useEffect } from "react";
-import { products } from "../assets/products";
+import { useState } from "react";
+import PropTypes from 'prop-types';
 
-
-const Search =()=> {
-
+const Search = ({ onSearchSubmit, setIsSearchOpen }) => {
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredProducts, setFilteredProducts] = useState(products);
 
-    useEffect(() => {
-     
-        const results = products.filter(product => 
-            product.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        setFilteredProducts(results);
-    }, [searchQuery]);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            onSearchSubmit(searchQuery); // Call the function passed as a prop
+        }
+    };
 
+    return (
+        <div className="pb-1"> 
+            <form onSubmit={handleSubmit} onMouseLeave={() => setIsSearchOpen(false)}>
+                <input
+                    type="search"
+                    placeholder="Search..."
+                    className="input-search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => setIsSearchOpen(true)} // Open search when focused
+                />
+            </form>
+        </div>
+    );
+};
 
-  return (
-    <div>
-        <input
-        type="text"
-        placeholder="Search products..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <ul>
-            {filteredProducts.map(product => (
-                <li key ={product.id}>{product.name}</li>
-            ))}
-        </ul>
-    </div>
-  )
-}
+Search.propTypes = {
+    onSearchSubmit: PropTypes.func.isRequired,
+    setIsSearchOpen: PropTypes.func.isRequired, // Add prop type for setIsSearchOpen
+};
 
-export default Search
+export default Search;

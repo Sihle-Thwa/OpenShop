@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -8,8 +9,11 @@
 }
 
 .navbar {
-  transition: all 0.3s ease;
- 
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between items */
+  align-items: center; /* Center items vertically */
+  padding: 1rem; /* Add some padding */
+  transition: all 0.3s ease; /* Smooth transition */
 }
 
 .navbar.sticky {
@@ -18,49 +22,58 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: lightgray;
-
+  background-color: lightgray; /* Background color when sticky */
 }
 
-.side-nav {
-  position: fixed;
-  top: 0;
-  left: -250px; /* Hide off-screen */
-  width: 250px;
-  height: 100%;
-  background-color: #fff;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-  transition: left 0.3s ease;
-  z-index: 1000;
+.nav-left {
+  flex: 1; /* Allow the brand to take space on the left */
 }
 
-.side-nav.open {
-  left: 0; /* Show the side nav */
+.nav-centre {
+  flex: 1; /* Allow the search input to take space in the center */
+  display: flex;
+  justify-content: center; /* Center the search input */
 }
 
-.side-nav-list {
-  list-style: none;
-  padding: 20px;
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Push the right items to the far right */
 }
 
-.side-nav-item {
-  margin: 15px 0;
+.navbar-nav {
+  display: flex; /* Use flexbox for nav items */
 }
 
-.side-nav-link {
-  text-decoration: none;
-  color: #333;
+.navbar-nav .nav-item {
+  margin-left: 1rem; /* Space between nav items */
 }
 
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  margin: 20px;
+.navbar-toggler {
+  border: none; /* Remove border from the toggler */
 }
 
 
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+  .navbar {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+
+  .nav-centre {
+      width: 100%; /* Full width for the search input */
+  }
+
+  .nav-right {
+      flex-direction: column; /* Stack buttons vertically */
+      margin-top: 1rem; /* Add some space above the right items */
+      align-items: flex-start; /* Align items to the start */
+  }
+
+  .nav-right .btn {
+      margin-bottom: 0.5rem; /* Space between buttons */
+  }
+}
 .header {
   background-image: url('./assets/header.jpg');
   height: 500px;
@@ -73,7 +86,7 @@
 
 .shop-button {
   background-color: rgb(0, 0, 0.5);
-  color:white ;
+  color: white;
   padding: 1rem 2rem;
   border: none;
   border-radius: 5px;
@@ -134,27 +147,95 @@ input {
 ul {
   list-style-type: none;
   padding: 0;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-container input {
+  padding: 10px;
+  margin-right: 10px;
+  width: 300px; /* Adjust width as needed */
+}
+
+.btn-close {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  z-index: 1;
+  font-size: 1.5em; /* Adjust size for the close icon */
+  margin-left: 10px; 
+}
+
+form {
+  position: relative;
+  transition: width 0.3s ease; /* Smooth transition for width */
+  width: 300px;; /* Initial width */
+  height: 50px; /* Height of the search button */
+  box-sizing: border-box;
+  border-radius: 25px;
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+}
+
+.input-search {
+  position: absolute; /* Position it absolutely within the form */
+  top: 50%; /* Center vertically */
+  left: 0; /* Align to the left */
+  width: 100%; /* Full width */
+  height: 42.5px; /* Height of the input */
+  line-height: 30px;
+  outline: none; /* Remove outline */
+  border: none; /* Remove border */
+  font-size: 1em;
+  border-radius: 20px;
+  padding: 0 20px; /* Padding for the input */
+  transform: translateY(-50%); /* Center the input vertically */
+  transition: visibility 0s, opacity 0.3s ease; /* Smooth transition */
+  
+}
+
+form:hover {
+  width: 300px; /* Expand width on hover */
+  cursor: pointer;
+}
+
+form:hover .input-search {
+  visibility: visible; /* Show input on hover */
+  opacity: 1; /* Fade in */
+}
+
+
+
+form:hover .close-icon {
+  display: block; /* Show close button on hover */
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+  form {
+    width: 100%; /* Full width on smaller screens */
   }
 
-  li{
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 5px;
+  form:hover {
+    width: 300px; /* Expand width on hover */
+  cursor: pointer;
   }
 
-  .search-container {
-    display: flex;
-    align-items: center;
+  .input-search {
+    display: flex; /* Show input on hover */
+    width: inherit; /* Full width */
   }
-  
-  .search-container input {
-    padding: 10px;
-    margin-right: 10px;
-    width: 300px; /* Adjust width as needed */
+
+  .search-icon {
+    right: 10px; /* Adjust position for smaller screens */
   }
-  
-  .btn-close {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
+
+  .close-icon {
+    right: 10px; /* Adjust position for smaller screens */
+
   }
+}
