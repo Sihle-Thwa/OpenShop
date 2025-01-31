@@ -56,7 +56,7 @@ function Home() {
       </div>
       <div className="row">
         {currentItems.map((product) => (
-          <div className="col-md-3 mb-4" key={product.id}>
+          <div className="container justify-content-between col-md-3 col-sm-5 mb-4" key={product.id}>
             <ProductCard product={product} />
           </div>
         ))}

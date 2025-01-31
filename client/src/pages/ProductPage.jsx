@@ -86,24 +86,21 @@ function ProductPage({ setCart }) {
         </div>
         <div className="col-lg-6 col-md-12">
           <div className="row text-start pb-2">
-            <h4>{product.name}</h4>
+            <h4><strong>{product.name}</strong></h4>
           </div>
           <div className="row text-start pb-2">
             <p>{product.description}</p>
           </div>
           <div className="row text-start pb-2">
-            <h2>R{product.price}</h2>
+            <h1>R{product.price}</h1>
           </div>
           <div className="row d-flex justify-content-between align-items-center">
-            <div className="col-12 mb-4">
+            <div className="col-10 mb-4">
               <button className="add-cart-btn w-100" onClick={handleCartUpdate}>
                 Add to cart
               </button>
             </div>
-            <div className="col-12 mb-4">
-              <button className="buy-now-btn w-100">Buy Now</button>
-            </div>
-            <div className="col-2">
+            <div className="col-2 mb-4">
               <button
                 role="button"
                 tabIndex="0"
@@ -119,6 +116,10 @@ function ProductPage({ setCart }) {
                 )}
               </button>
             </div>
+            <div className="col-12 mb-4">
+              <button className="buy-now-btn w-100">Buy Now</button>
+            </div>
+            
           </div>
           <div className="row">
             <div className="row p-4">

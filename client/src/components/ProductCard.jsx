@@ -53,7 +53,7 @@ function ProductCard({ product, onAddToCart }) {
           className="product-image img-fluid" 
         />
         <div className="row d-flex justify-content-between align-items-center mt-2">
-          <div className="col-8 col-md-10 text-start">{product.name}</div>
+          <div className="col-8 col-md-10 text-start"><strong>{product.name}</strong> </div>
           <span
             role="button"
             tabIndex="0"
