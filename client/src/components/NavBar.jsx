@@ -45,7 +45,7 @@ function NavBar({ onOpenCart }) {
       className={`navbar navbar-expand-lg d-flex justify-content-between ${isSticky ? "sticky" : ""}`}
     >
       <div className="container d-flex justify-content-between align-items-center">
-        <div className="navbar-brand">OpenShop</div>
+        <a className="navbar-brand" href="/ n">OpenShop</a>
         <button
           className="navbar-toggler"
           type="button"

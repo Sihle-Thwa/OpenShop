@@ -33,11 +33,18 @@ function CartModal({ onClose, cart }) {
               cart.map((item) => (
                 <div
                   key={item.id}
-                  className="d-flex justify-content-between align-items-center"
+                  className="row d-flex justify-content-between align-items-center"
                 >
-                  <div>{item.name}</div>
-                  <div>Quantity: 1</div>
-                  <div>R{item.price.toFixed(2)}</div> {/* Format price to 2 decimal places */}
+                  <div className="col-2 pb-1">
+                    <img className="cart-image" src={item.image} alt={item.name}/>
+                  </div>
+                  <div className="col-8">
+                    <div className="row fw-bold">{item.name}</div>
+                    <div className="row"> Quantity: 1</div>
+                    <div className="row d-flex align-items-end">R{item.price.toFixed(2)}</div>{" "}
+                    {/* Format price to 2 decimal places */}{" "}
+                  </div>
+
                   <button className="btn btn-danger btn-sm ms-2">
                     <BsTrash />
                   </button>
@@ -76,6 +83,7 @@ CartModal.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
+      image: PropTypes.string.isRequired,
     })
   ).isRequired,
   onClose: PropTypes.func.isRequired,

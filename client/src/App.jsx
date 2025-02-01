@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Collection from "./pages/Collection";
 import ProductPage from "./pages/ProductPage";
 import Footer from "./components/Footer";
-import CartModal from "./components/CartModal";
+import CartModal from "./components/modals/CartModal";
 
 function App() {
   const [cart, setCart] = useState([]);
