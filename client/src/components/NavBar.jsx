@@ -99,12 +99,19 @@ function NavBar({ onOpenCart }) {
             >
               <BsBag />
             </button>
+
             <button
               type="button"
-              className="btn"
+              className="btn dropdown"
               aria-label="User account"
             >
+              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <BsPerson />
+              </a>
+              <ul className="dropdown-menu">
+                <li><a className="dropdown-item" href="/login">Login</a></li>
+                <li><a className="dropdown-item" href="/register">Register</a></li>
+              </ul>
             </button>
           </div>
         </div>
