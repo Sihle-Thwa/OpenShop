@@ -5,7 +5,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import ProductCard from "../components/ProductCard.jsx";
 
-function ProductPage({ setCart }) {
+function ProductPage({ onAddToCart,setCart }) {
   const { productId } = useParams();
   const [isSelected, setIsSelected] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -18,30 +18,6 @@ function ProductPage({ setCart }) {
   if (!product) {
     return <div>Product not found</div>;
   }
-
-  const handleCartUpdate = () => {
-    // Set the toast message based on whether the product was added or removed
-    setCart((prev) => {
-      const isProductInCart = prev.some((item) => item.id === product.id);
-      const updatedCartList = isProductInCart
-        ? prev.filter((item) => item.id !== product.id)
-        : [
-            ...prev,
-            { id: product.id, name: product.name, price: product.price },
-          ];
-      localStorage.setItem("cart", JSON.stringify(updatedCartList));
-      setToastMessage(
-        `${product.name} has been ${
-          isProductInCart ? "removed from" : "added to"
-        } your cart`
-      );
-      setShowToast(true);
-      setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
-      return updatedCartList;
-    });
-  };
 
   const handleClick = () => {
     setIsSelected(!isSelected);
@@ -96,7 +72,12 @@ function ProductPage({ setCart }) {
           </div>
           <div className="row d-flex justify-content-between align-items-center">
             <div className="col-10 mb-4 pr-0">
-              <button className="add-cart-btn w-100" onClick={handleCartUpdate}>
+              <button className="add-cart-btn w-100" onClick={() => {
+                onAddToCart(product);
+                setToastMessage(`${product.name} has been added to your cart`);
+                setShowToast(true);
+              setTimeout(()=> setShowToast(false), 3000)}
+              }>
                 Add to cart
               </button>
             </div>
@@ -139,7 +120,7 @@ function ProductPage({ setCart }) {
             {relatedProducts.length > 0 ? (
               relatedProducts.map((item) => (
                 <div key={item.id} className="col-6 col-md-4 col-lg-3 mb-3">
-                  <ProductCard product={item} />
+                  <ProductCard  product={item} onAddToCart={onAddToCart}/>
                 </div>
               ))
             ) : (
@@ -180,14 +161,8 @@ function ProductPage({ setCart }) {
 }
 
 ProductPage.propTypes = {
-  cart: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    })
-  ),
-  setCart: PropTypes.func,
+  onAddToCart: PropTypes.func.isRequired,
+  setCart: PropTypes.func.isRequired,
 };
 
 export default ProductPage;

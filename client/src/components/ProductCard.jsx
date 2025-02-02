@@ -115,7 +115,7 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
-  onAddToCart: PropTypes.func.isRequired, 
+  onAddToCart: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

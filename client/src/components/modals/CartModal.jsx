@@ -13,7 +13,7 @@ function CartModal({ onClose, cart }) {
       style={{ display: "block" }} // Ensure the modal is visible
       tabIndex="-1"
       aria-labelledby="cartModalLabel"
-      aria-hidden="true"
+   
     >
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="modal-content">
@@ -83,9 +83,9 @@ CartModal.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
+      image: PropTypes.string,
     })
-  ).isRequired,
+  ),
   onClose: PropTypes.func.isRequired,
 };
 

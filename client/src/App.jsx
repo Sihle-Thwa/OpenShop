@@ -46,7 +46,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/home" element={<Home />} />
         <Route path="/collection" element={<Collection onAddToCart={handleAddToCart} />} />
-        <Route path="/product/:productId" element={<ProductPage onAddToCart={handleAddToCart} />} />
+        <Route path="/product/:productId" element={<ProductPage onAddToCart={handleAddToCart} setCart={setCart} />} />
       </Routes>
       <Footer />
     </BrowserRouter>
