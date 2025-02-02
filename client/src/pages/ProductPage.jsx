@@ -62,7 +62,7 @@ function ProductPage({ setCart }) {
     setShowToast(false);
   };
 
-  const uniqueSizes = [...new Set(products.flatMap((item) => item.sizes))];
+  const uniqueSizes = product.id ?  [...new Set(product.sizes)] : [];
 
   // Get Products in the same category for related products
   const getProductsByCategory = (category) => {
@@ -76,7 +76,7 @@ function ProductPage({ setCart }) {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-lg-6 col-md-12">
+        <div className="col-lg-6 col-md-12  mb-4">
           <img
             src={product.image}
             alt={product.name}
@@ -95,7 +95,7 @@ function ProductPage({ setCart }) {
             <h1>R{product.price}</h1>
           </div>
           <div className="row d-flex justify-content-between align-items-center">
-            <div className="col-10 mb-4">
+            <div className="col-10 mb-4 pr-0">
               <button className="add-cart-btn w-100" onClick={handleCartUpdate}>
                 Add to cart
               </button>
@@ -104,7 +104,7 @@ function ProductPage({ setCart }) {
               <button
                 role="button"
                 tabIndex="0"
-                className={`p-1 d-flex justify-content-center`}
+                className={`p-1 d-flex justify-content-center fs-5 border-0 bg-transparent pl-0`}
                 onClick={handleClick}
                 onKeyPress={(e) => e.key === "Enter" && handleClick()} // Allows keyboard interaction
                 style={{ cursor: "pointer" }}
@@ -116,9 +116,7 @@ function ProductPage({ setCart }) {
                 )}
               </button>
             </div>
-            <div className="col-12 mb-4">
-              <button className="buy-now-btn w-100">Buy Now</button>
-            </div>
+            
             
           </div>
           <div className="row">
@@ -133,7 +131,6 @@ function ProductPage({ setCart }) {
               </ul>
             </div>
           </div>
-          
         </div>
         <hr/>
         <div className="row p-2">
