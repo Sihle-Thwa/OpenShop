@@ -122,8 +122,9 @@ function ProductPage({ setCart }) {
             
           </div>
           <div className="row">
+            <h5 className="d-flex">Available Sizes</h5>
             <div className="row p-4">
-              <ul className="d-flex justify-content-between flex-wrap">
+              <ul className="d-flex">
                 {uniqueSizes.map((sz) => (
                   <button key={sz} className="btn btn-outline-secondary m-1">
                     {sz}
@@ -132,9 +133,10 @@ function ProductPage({ setCart }) {
               </ul>
             </div>
           </div>
+          
         </div>
-
-        <div className="row p-1">
+        <hr/>
+        <div className="row p-2">
           <h3>Related Products</h3>
           <div className="d-flex flex-wrap justify-content-start related-products">
             {relatedProducts.length > 0 ? (

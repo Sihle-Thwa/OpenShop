@@ -359,7 +359,7 @@ export const products = [
     image: Product_28,
     category: "Shoes",
     subCategory: "Men",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: ["5", "6", "7", "8","9","10","11"],
     popular: false,
   },
   {
@@ -469,7 +469,7 @@ export const products = [
     image: Product_38,
     category: "Shoes",
     subCategory: "Men",
-    sizes: ["S", "M", "L", "XL"],
+    sizes: ["4", "5", "6", "7","8","9","10","11","12"],
     popular: false,
   },
   {
