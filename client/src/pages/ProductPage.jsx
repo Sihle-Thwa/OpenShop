@@ -5,7 +5,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import ProductCard from "../components/ProductCard.jsx";
 
-function ProductPage({ onAddToCart,setCart }) {
+function ProductPage({ onAddToCart, }) {
   const { productId } = useParams();
   const [isSelected, setIsSelected] = useState(false);
   const [showToast, setShowToast] = useState(false);

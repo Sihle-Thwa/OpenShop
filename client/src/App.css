@@ -262,3 +262,12 @@ form:hover .close-icon {
     justify-content: space-evenly !important;
   }
 }
+
+.table th, td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.text-center {
+  text-align: center;
+}

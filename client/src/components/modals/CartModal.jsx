@@ -29,30 +29,46 @@ function CartModal({ onClose, cart }) {
             ></button>
           </div>
           <div className="modal-body">
-            {cart.length > 0 ? (
-              cart.map((item) => (
-                <div
-                  key={item.id}
-                  className="row d-flex justify-content-between align-items-center"
-                >
-                  <div className="col-2 pb-1">
-                    <img className="cart-image" src={item.image} alt={item.name}/>
-                  </div>
-                  <div className="col-8">
-                    <div className="row fw-bold">{item.name}</div>
-                    <div className="row"> Quantity: 1</div>
-                    <div className="row d-flex align-items-end">R{item.price.toFixed(2)}</div>{" "}
-                    {/* Format price to 2 decimal places */}{" "}
-                  </div>
-
-                  <button className="btn btn-danger btn-sm ms-2">
-                    <BsTrash />
-                  </button>
-                </div>
-              ))
-            ) : (
-              <div>Your cart is empty.</div>
-            )}
+            <table className="table">
+              <thead >
+                <tr>
+                  <th><div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    </div>
+                    </th>
+                  <th>PRODUCT</th>
+                  <th>QUANTITY</th>
+                  <th>PRICE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cart.length > 0 ? (
+                cart.map((item) => (
+                  <tr key={item.id}>
+                    <td className="justify-content-left"><div className="form-check">
+                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    </div></td>
+                    <td className="row">
+                       <div className="col">
+                       <img className="cart-image" src={item.image} alt={item.name}/>
+                       </div>
+                       <div className="col">
+                       {item.name} 
+                        </div>
+                       
+                       </td>
+                    <td>1</td>
+                    <td>R{item.price.toFixed(2)}</td>
+                  </tr>
+                ))
+                ):(
+                  <tr>
+                    <td colSpan="4">Your cart is empty.</td>
+                  </tr>
+                )}
+                </tbody>
+            </table>
+            
           </div>
           <div className="modal-footer">
             {cart.length > 0 && (
