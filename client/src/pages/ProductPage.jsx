@@ -78,7 +78,7 @@ function ProductPage({ onAddToCart, }) {
                 setShowToast(true);
               setTimeout(()=> setShowToast(false), 3000)}
               }>
-                Add to cart
+                ADD TO CART
               </button>
             </div>
             <div className="col-2 mb-4">

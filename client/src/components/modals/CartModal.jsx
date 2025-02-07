@@ -74,7 +74,7 @@ function CartModal({ onClose, cart }) {
                       <td className="justify-content-left">
                         <div className="form-check">
                           <input
-                            className="form-check-input"
+                            className="form-check-input border-1 border-black form-check-input-checked-color-dark"
                             type="checkbox"
                             value=""
                             id="flexCheckDefault"
@@ -138,7 +138,7 @@ function CartModal({ onClose, cart }) {
             )}
             
             <button type="button" className="btn add-cart-btn">
-              Checkout
+              CHECKOUT NOW
             </button>
           </div>
         </div>

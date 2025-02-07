@@ -42,32 +42,35 @@ const FilterComponent = ({ products, onFilterChange }) => {
       <h6
         onClick={() => setIsOpen(!isOpen)}
         style={{ cursor: "pointer" }}
-        className="d-flex align-items-center"
+        className="d-flex justify-content-between"
       >
         {title}
-        <span className="ms-2">
+        <span className="ms-2 justify-content-end">
           {isOpen ? <BsArrowUpShort /> : <BsArrowDownShort />}
         </span>
       </h6>
       {isOpen && (
-        <ul className="list-unstyled">
+        <ul className="filterOption list-unstyled">
           {items.map((item) => (
-            <li className="mb-1" key={item}>
+            <li className="filterOptions pl-0 text-start mb-1" key={item}>
               <label className="d-flex align-items-center">
-                <input
-                  type="checkbox"
-                  value={item}
-                  checked={state.includes(item)}
-                  onChange={(e) => {
+              <input
+                type="checkbox"
+                value={item}
+                checked={state.includes(item)}
+                onChange={(e) => {
+                  setState((prevState) => {
                     const newState = e.target.checked
-                      ? [...state, item]
-                      : state.filter((s) => s !== item);
-                    setState(newState);
-                    handleFilterChange();
-                  }}
-                  className="me-2"
+                      ? [...prevState, item]
+                      : prevState.filter((s) => s !== item);
+                    handleFilterChange(newState); // Pass the new state to handleFilterChange
+                    return newState; // Return the new state
+                  });
+                }}
+                className="ms-2 d-inline-flex "
                 />
-                {item}
+                <span className="ms-2">{item}</span>
+                
               </label>
             </li>
           ))}
@@ -77,9 +80,9 @@ const FilterComponent = ({ products, onFilterChange }) => {
   );
 
   return (
-    <div className="card border-0 d-flex">
+    <div className="card border-0 shadow-sm">
       <div className="card-body">
-        <h5 className="d-flex align-items-center">Filter Options</h5>
+        <h5 className="d-flex ">Filter Options</h5>
         <div>
           {renderFilterSection(
             "Categories",

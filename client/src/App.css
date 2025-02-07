@@ -158,7 +158,6 @@
 }
 
 input {
-  width: 100%;
   padding: 0.5rem;
   margin: 0.5rem 0;
   border: 1px solid #ccc;
@@ -271,3 +270,6 @@ form:hover .close-icon {
 .text-center {
   text-align: center;
 }
+
+
+

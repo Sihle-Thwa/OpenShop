@@ -72,7 +72,7 @@ function ProductCard({ product, onAddToCart }) {
         <div className="row d-flex justify-content-between mt-1">
           <div className="col-6 text-start">R{product.price}</div>
           <button className="btn add-cart-btn" onClick={handleAddToCart}>
-            Add to Cart
+            ADD TO CART
           </button>
         </div>
       </div>
